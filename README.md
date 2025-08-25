@@ -25,10 +25,12 @@ Description: A ten-class object detection dataset for very high-resolution remot
 
 Download: [Clone the repository from NWPU-VHR-10.](https://github.com/Gaoshuaikun/NWPU-VHR-10)
 
-# Results and Models
-This section will be populated upon the release of our trained models.
+## Results and Models
 
-Dataset	Backbone	mAP	Download
-HRSC2016	MAC-Mamba	TBD	Model | Log
-DOTA (val)	MAC-Mamba	TBD	Model | Log
-NWPU-VHR-10	MAC-Mamba	TBD	Model | Log
+*Performance results on various remote sensing datasets. TBD (To Be Determined) values will be updated upon completion of training.*
+
+| **Dataset**       | **Backbone** | **mAP** | **Download**      |
+|-------------------|--------------|---------|-------------------|
+| HRSC2016          | MAC-Mamba    | TBD     | [Model](#) \| [Log](#) |
+| DOTA (val)        | MAC-Mamba    | TBD     | [Model](#) \| [Log](#) |
+| NWPU-VHR-10       | MAC-Mamba    | TBD     | [Model](#) \| [Log](#) |
