@@ -91,26 +91,11 @@ class MambaOut_RepLK(nn.Module):
         
         # 初始化 C2f 基类
         super(C2f, self).__init__()
-        self._init_c2f_components()
         
         # 构建 MambaOut 块序列
         self.mamba_blocks = self._build_mamba_blocks(
             expansion_ratio, kernel_size, conv_ratio
         )
-
-    def _init_c2f_components(self):
-        """初始化 C2f 基础组件"""
-        self.c = self.hidden_channels  # 隐藏通道数
-        
-        # 输入卷积
-        self.cv1 = Conv(self.input_channels, 2 * self.c, 1, 1)
-        
-        # 输出卷积
-        self.cv2 = Conv((2 + self.num_blocks) * self.c, self.output_channels, 1)
-        
-        # 如果没有块，则使用身份映射
-        if self.num_blocks == 0:
-            self.m = nn.Identity()
 
     def _build_mamba_blocks(self, expansion_ratio, kernel_size, conv_ratio):
         """构建 MambaOut 块序列"""
@@ -130,13 +115,7 @@ class MambaOut_RepLK(nn.Module):
         y.extend(m(y[-1]) for m in self.mamba_blocks)
         
         return self.cv2(torch.cat(y, 1))
-
-    def switch_to_deploy(self):
-        """切换到部署模式（如果支持）"""
-        for block in self.mamba_blocks:
-            if hasattr(block, 'switch_to_deploy'):
-                block.switch_to_deploy()
-
+ 
     def get_output_shape(self, input_shape):
         """计算输出特征图形状"""
         batch_size, channels, height, width = input_shape
